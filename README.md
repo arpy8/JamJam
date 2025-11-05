@@ -3,7 +3,7 @@
 </div>
 
 <h1> JamJam </h1>
-Welcome to the **JamJam** repository! 🎉 Dive into the world of RF interference with this unique project based on the ESP32-C3 and NRF24 technology.
+Welcome to the *JamJam* repository! 🎉 Dive into the world of RF interference with this unique project based on the ESP32-C3 and NRF24 technology.
 
 ## 📚 Table of Contents
 <!-- - [🎯 Possible Additions](#-possible-additions) -->
