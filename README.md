@@ -1,13 +1,13 @@
 <div align="center">
   <img src="https://avatars.githubusercontent.com/u/176677387" width="150" height="auto" />
-  <h1> 🌟 nRF24 Jammer 🌟 </h1>
+  <h1> 🌟 JamJam 🌟 </h1>
 </div>
 
-Welcome to the **nRF24 Jammer** repository! 🎉 Dive into the world of RF interference with this unique project based on the ESP32 and NRF24 technology.
+Welcome to the **JamJam** repository! 🎉 Dive into the world of RF interference with this unique project based on the ESP32-C3 and NRF24 technology.
 
 ## 📚 Table of Contents
-- [🎯 Possible Additions](#-possible-additions)
-- [🚀 What Can You Do with This?](#-what-can-you-do-with-this)
+<!-- - [🎯 Possible Additions](#-possible-additions) -->
+<!-- - [🚀 What Can You Do with This?](#-what-can-you-do-with-this) -->
 - [📋 List of Components](#-list-of-components)
 - [🧑‍🔧 Let's Get Started with Soldering!](#-lets-get-started-with-soldering)
 - [📦 Flash Firmware](#-flash-firmware)
@@ -15,10 +15,8 @@ Welcome to the **nRF24 Jammer** repository! 🎉 Dive into the world of RF inter
 - [🌐 Web Interface](#-Web-Interface)
 - [🎉 Final Outcome](#-final-outcome)
 - [🙏 Acknowledgments](#-acknowledgments)
-- [❤️ Support the project](#-support-the-project)
-- [🌐 Follow Me for Updates](#-follow-me-for-updates)
 
------
+<!-- -----
 
 ## 🎯 Possible Additions
 - **Deauthentication attack**
@@ -28,10 +26,10 @@ Welcome to the **nRF24 Jammer** repository! 🎉 Dive into the world of RF inter
 
 ***`If you have the capability to assist with these features, please feel free to create pull requests!`***
 
------
+----- -->
 
 ## 🚀 What Can You Do with This?
-This amazing jammer is built on the **ESP32** architecture integrated with **configurable numbers of NRF24** modules. With its extraordinary capabilities, you can effectively disrupt signals across different technologies including:
+This amazing jammer is built on the **ESP32-C3** architecture integrated with **configurable numbers of NRF24** modules. With its extraordinary capabilities, you can effectively disrupt signals across different technologies including:
 - **Bluetooth** 🔊
 - **BLE** 📱
 - **Drones** 🚁
@@ -42,258 +40,62 @@ This amazing jammer is built on the **ESP32** architecture integrated with **con
 
 ## 📋 List of Components
 To bring this project to life, you will need the following components:
-1. **NRF24L01+PA+LNA modules** 🛠️
-2. **ESP-WROOM-32** ⚙️
-3. **16V capacitors** rated at **100µF** 🔋
-4. **128x32 or 128x64 OLED display** 📺 *(optional)*
-5. **Tactile button** 🔘 *(optional)*
+
+| Name | Designator | Link (Robu) | Quantity | Unit Price (₹) | Amount (₹) |
+|------|-------------|------|-----------|----------------|-------------|
+| 100nF | C1 | [TCC0805X7R104K101DT – CCTC 100nF Capacitor](https://robu.in/product/tcc0805x7r104k101dt-cctc-smt-ceramic-capacitors-0805-x7r-104k100nf%c2%b110-rated-voltage100v-thickness0-85mmtape/) | 2 | 6 | 12 |
+| ESP32-C3 Development Board with Soldering | MCU | [ESP32-C3 Development Board](https://robu.in/product/esp32-c3-development-board-with-soldering/) | 1 | 257 | 257 |
+| 0.91 inch 128×32 Blue OLED Display Module with I2C/IIC Serial Interface | OLED | [Blue OLED Display Module](https://robu.in/product/blue-oled-display-module/) | 1 | 144 | 144 |
+| 2.4GHz NRF24L01+PA+LNA SMA Wireless Transceiver Antenna | NRF1, NRF2 | [NRF24L01+PA+LNA Module](https://robu.in/product/2-4ghz-nrf24l01palna-sma-antenna-wireless-transceiver-communication-module-1km/) | 2 | 135 | 270 |
 
 -----
 
 ## 🧑‍🔧 Let's Get Started with Soldering!
-<details>
-<summary><strong>With OLED</strong></summary>
-
 <div style="margin-left: 20px;">
 
-## Differences between versions
-
-**Flexible version**
-
-<ul><li>Number of modules: Supports up to 30 nRF24 modules (a software limit). In practice, the maximum number depends on the number of available GPIO pins on the microcontroller</li></ul>
-
-<ul><li>Advantage: All modules share common MOSI, MISO, and SCK lines, which saves pins and simplifies wiring. This also ensures that access to the display remains available during operation</li></ul>
-
-<ul><li>Flexibility: You can choose any number of modules within the limit, optimizing the device for your specific tasks</li></ul>
-
-<ul><li>Disadvantage: Before first use, you must define the CE and CSN pins for each nRF24 module in the settings</li></ul>
-
-**Compact version**
-
-<ul><li>Number of modules: Uses only 1 nRF24 module, which significantly reduces the device's size</li></ul>
-
-<ul><li>Disadvantage: Smaller jamming range and lower effectiveness compared to other versions</li></ul>
-
-<ul><li>Compatibility: It is possible to flash the Flexible version firmware onto a Compact hardware device. If you do this, you will need to manually configure the CE and CSN pins for the single module in the settings</li></ul>
-
-**Standard version (outdated)**
-
-<ul><li>Number of modules: Used 2 nRF24 modules, which provided sufficient jamming power</li></ul>
-
-<ul><li>Critical Flaw: Due to a pin conflict between the nRF24 modules and the display, the user interface became unresponsive after jamming was started. This made it impossible to stop the device via the display, requiring a full power cycle to shut it down</li></ul>
-
-<ul><li>Status: Starting from version V2.6.0, this version is no longer supported or updated. It is highly recommended to switch to the Flexible version</li></ul>
-
----
-
-<details>
-<summary><strong>Flexible</strong></summary>
-
-<div style="margin-left: 20px;">
-
-### Connecting First nRF24 module (**optional**)
+### Connecting First nRF24 module
 | **Pin Name** | **ESP32 GPIO** | **Connection**       |
 |--------------|----------------|----------------------|
-| VCC          | 3.3V          | (+) capacitor        |
-| GND          | GND           | (-) capacitor        |
-| CE           | GPIO 16       |                      |
-| CSN          | GPIO 15       |                      |
-| SCK          | GPIO 14       |                      |
-| MOSI         | GPIO 13       |                      |
-| MISO         | GPIO 12       |                      |
+| VCC          | 3.3V           | (+) capacitor        |
+| GND          | GND            | (-) capacitor        |
+| CE           | GPIO 13        |                      |
+| CSN          | GPIO 14        |                      |
+| SCK          | GPIO 12        |                      |
+| MISO         | GPIO 5         |                      |
+| MOSI         | GPIO 6         |                      |
 | IRQ          |                |                      |
 
-### Connecting Second nRF24 module (**optional**)
+### Connecting Second nRF24 module
 | **Pin Name** | **ESP32 GPIO** | **Connection**       |
 |--------------|----------------|----------------------|
-| VCC          | 3.3V          | (+) capacitor        |
-| GND          | GND           | (-) capacitor        |
-| CE           | GPIO 18       |                      |
-| CSN          | GPIO 17       |                      |
-| SCK          | GPIO 14       |                      |
-| MOSI         | GPIO 13       |                      |
-| MISO         | GPIO 12       |                      |
-| IRQ          |                |                      |
-
-### Connecting Third nRF24 module (**optional**)
-| **Pin Name** | **ESP32 GPIO** | **Connection**       |
-|--------------|----------------|----------------------|
-| VCC          | 3.3V          | (+) capacitor        |
-| GND          | GND           | (-) capacitor        |
-| CE           | GPIO 23       |                      |
-| CSN          | GPIO 19       |                      |
-| SCK          | GPIO 14       |                      |
-| MOSI         | GPIO 13       |                      |
-| MISO         | GPIO 12       |                      |
-| IRQ          |                |                      |
-
-### Connecting Fourth nRF24 module (**optional**)
-| **Pin Name** | **ESP32 GPIO** | **Connection**       |
-|--------------|----------------|----------------------|
-| VCC          | 3.3V          | (+) capacitor        |
-| GND          | GND           | (-) capacitor        |
-| CE           | GPIO 5        |                      |
-| CSN          | GPIO 4        |                      |
-| SCK          | GPIO 14       |                      |
-| MOSI         | GPIO 13       |                      |
-| MISO         | GPIO 12       |                      |
-| IRQ          |                |                      |
-
-### Connecting Fifth nRF24 module (**optional**)
-| **Pin Name** | **ESP32 GPIO** | **Connection**       |
-|--------------|----------------|----------------------|
-| VCC          | 3.3V          | (+) capacitor        |
-| GND          | GND           | (-) capacitor        |
-| CE           | GPIO 33       |                      |
-| CSN          | GPIO 32       |                      |
-| SCK          | GPIO 14       |                      |
-| MOSI         | GPIO 13       |                      |
-| MISO         | GPIO 12       |                      |
+| VCC          | 3.3V           | (+) capacitor        |
+| GND          | GND            | (-) capacitor        |
+| CE           | GPIO 15        |                      |
+| CSN          | GPIO 16        |                      |
+| SCK          | GPIO 12        |                      |
+| MISO         | GPIO 5         |                      |
+| MOSI         | GPIO 6         |                      |
 | IRQ          |                |                      |
 
 ### OLED Connection
 | **Pin Name** | **ESP32 GPIO** |
 |--------------|----------------|
-| VCC          | 3.3V          |
-| GND          | GND           |
-| SCL          | GPIO 22       |
-| SDA          | GPIO 21       |
+| VCC          | 3.3V           |
+| GND          | GND            |
+| SDA          | GPIO 8         |
+| SCL          | GPIO 9         |
 
 ### Button Connection
 | **Button Actions** | **ESP32 GPIO** |
-|--------------|----------------|
-| OK          | GPIO 25       |
-| NEXT (Optional)             | GPIO 26       |
-| PREVIOUS (Optional)            | GPIO 27       |
+|--------------------|----------------|
+| OK                 | GPIO 20        |
+| NEXT               | GPIO 10        |
+| PREVIOUS           | GPIO 21        |
 
-![Flexible](schemes/Flexible/scheme.png)
-
-###### In all configurations the same SCK, MOSI, and MISO pins are used. This is not a mistake—SPI interfaces can share clock and data lines, while proper operation is ensured by separate control signals (CSN and CE)
-
-</div>
-</details>
-
-<details>
-<summary><strong>Compact</strong></summary>
-
-<div style="margin-left: 20px;">
-
-### HSPI Connection
-| **Pin Name** | **ESP32 GPIO** | **Connection**       |
-|--------------|----------------|----------------------|
-| VCC          | 3.3V          | (+) capacitor        |
-| GND          | GND           | (-) capacitor        |
-| CE           | GPIO 16       |                      |
-| CSN          | GPIO 15       |                      |
-| SCK          | GPIO 14       |                      |
-| MOSI         | GPIO 13       |                      |
-| MISO         | GPIO 12       |                      |
-| IRQ          |                |                      |
-
-### OLED Connection
-| **Pin Name** | **ESP32 GPIO** |
-|--------------|----------------|
-| VCC          | 3.3V          |
-| GND          | GND           |
-| SCL          | GPIO 22       |
-| SDA          | GPIO 21       |
-
-### Button Connection
-| **Button Actions** | **ESP32 GPIO** |
-|--------------|----------------|
-| OK          | GPIO 25       |
-| NEXT (Optional)             | GPIO 26       |
-| PREVIOUS (Optional)            | GPIO 27       |
-
-![Compact](schemes/Compact/scheme.png)
+### Schematic
+![schematic](scheme/Schematic_JamJam_2025-11-05.png)
 
 </div>
-</details>
-
-<details>
-<summary><strong>Standard (outdated)</strong></summary>
-
-<div style="margin-left: 20px;">
-
-### HSPI Connection
-| **Pin Name** | **ESP32 GPIO** | **Connection**       |
-|--------------|----------------|----------------------|
-| VCC          | 3.3V          | (+) capacitor        |
-| GND          | GND           | (-) capacitor        |
-| CE           | GPIO 16       |                      |
-| CSN          | GPIO 15       |                      |
-| SCK          | GPIO 14       |                      |
-| MOSI         | GPIO 13       |                      |
-| MISO         | GPIO 12       |                      |
-| IRQ          |                |                      |
-
-### VSPI Connection
-| **Pin Name** | **ESP32 GPIO** | **Connection**       |
-|--------------|----------------|----------------------|
-| VCC          | 3.3V          | (+) capacitor        |
-| GND          | GND           | (-) capacitor        |
-| CE           | GPIO 22       |                      |
-| CSN          | GPIO 21       |                      |
-| SCK          | GPIO 18       |                      |
-| MOSI         | GPIO 23       |                      |
-| MISO         | GPIO 19       |                      |
-| IRQ          |                |                      |
-
-### OLED Connection
-| **Pin Name** | **ESP32 GPIO** |
-|--------------|----------------|
-| VCC          | 3.3V          |
-| GND          | GND           |
-| SCL          | GPIO 22       |
-| SDA          | GPIO 21       |
-
-### Button Connection
-| **Button Actions** | **ESP32 GPIO** |
-|--------------|----------------|
-| OK          | GPIO 25       |
-| NEXT (Optional)             | GPIO 26       |
-| PREVIOUS (Optional)            | GPIO 27       |
-
-![Standard](schemes/Standard/scheme.png)
-
-</div>
-</details>
-
-</div>
-</details>
-<details>
-<summary><strong>Without OLED</strong></summary>
-
-<div style="margin-left: 20px;">
-
-### HSPI Connection
-| **Pin Name** | **ESP32 GPIO** | **Connection**       |
-|--------------|----------------|----------------------|
-| VCC          | 3.3V          | (+) capacitor        |
-| GND          | GND           | (-) capacitor        |
-| CE           | GPIO 16       |                      |
-| CSN          | GPIO 15       |                      |
-| SCK          | GPIO 14       |                      |
-| MOSI         | GPIO 13       |                      |
-| MISO         | GPIO 12       |                      |
-| IRQ          |                |                      |
-
-### VSPI Connection
-| **Pin Name** | **ESP32 GPIO** | **Connection**       |
-|--------------|----------------|----------------------|
-| VCC          | 3.3V          | (+) capacitor        |
-| GND          | GND           | (-) capacitor        |
-| CE           | GPIO 22       |                      |
-| CSN          | GPIO 21       |                      |
-| SCK          | GPIO 18       |                      |
-| MOSI         | GPIO 23       |                      |
-| MISO         | GPIO 19       |                      |
-| IRQ          |                |                      |
-
-![Without_OLED](schemes/Without_OLED/scheme.png)
-
-</div>
-</details>
 
 -----
 
@@ -335,64 +137,27 @@ Follow these steps to flash the firmware:
 </div>
 </details>
 
-###### ⚠️ Important for source builds: Since v2.5.0, this project uses a modified RF24 library (see /lib).
-
 -----
 
 ## 🎮 Device Control 
 
-<details>
-<summary><strong>🟢 1-Button Configuration</strong></summary>
 <div style="margin-left: 20px;">
 
 #### 📋 Menu Navigation
-- **Short press** → Next menu item
-- **Long press** → Select menu item
-
-#### 📡 Misc Jammer
-- **Short press** → Channel +1
-- **Long press** → Continuous channel +1 (every 100ms)
-- **Double press** → Select channel
-
-</div>
-</details>
-
-<details>
-<summary><strong>🔵 2-Button Configuration</strong></summary>
-<div style="margin-left: 20px;">
-
-#### 📋 Menu Navigation
-- **Next button** short press → Next menu item
 - **OK button** short press → Select menu item
-
-#### 📡 Misc Jammer
-- **Next button** short press → Channel +1
-- **Next button** long press → Continuous channel +1 (every 100ms)
-- **OK button** short press → Select channel
-
-</div>
-</details>
-
-<details>
-<summary><strong>🟣 3-Button Configuration</strong></summary>
-<div style="margin-left: 20px;">
-
-#### 📋 Menu Navigation
 - **Next button** short press → Next menu item
 - **Previous button** short press → Previous menu item
-- **OK button** short press → Select menu item
 
 #### 📡 Misc Jammer
+- **OK button** short press → Select channel
 - **Next button** short press → Channel +1
 - **Next button** long press → Continuous channel +1 (every 100ms)
 - **Previous button** short press → Channel -1
 - **Previous button** long press → Continuous channel -1 (every 100ms)
-- **OK button** short press → Select channel
 
 </div>
-</details>
 
-> **Single press** stops active attacks (not supported on "Standard" versions)
+> **Single press** stops active attacks
 
 -----
 
@@ -400,7 +165,7 @@ Follow these steps to flash the firmware:
 
 - To utilize the web interface, please follow the steps outlined below.
 1. activate the **nRF24 jammer**.
-2. Connect to the Wi-Fi network named `jammer` using the password `W0rthlessS0ul`.
+2. Connect to the Wi-Fi network named `JamJam` using the password `poopoo`.
 3. open your web browser and navigate to the IP address `192.168.4.1`.
 4. Now you can control your nRF24 jammer through an web interface.
 
@@ -409,11 +174,11 @@ Follow these steps to flash the firmware:
 -----
 
 ## 🎉 Final Outcome
-### Standard version 
-![Standard](img/Standard.jpg)
 
-### Compact version
-![Compact](img/Compact.jpg)
+### CAD Model (To be printed)
+|Closed|Open|
+|-|-|
+|![alt text](img/case-close.png)|![alt text](img/case-open.png)|
 
 ### Normal Spectrum
 ![Normal Spectrum](img/gif/normal_spctr.gif)
@@ -436,33 +201,6 @@ Follow these steps to flash the firmware:
 -----
 
 ## 🙏 Acknowledgments
-- [smoochiee](https://github.com/smoochiee) - **for the main logic of the jammer.**
-- [samukas81](https://github.com/samukas81) - **for suggesting ideas.**
+- [W0rthlessS0ul](https://github.com/W0rthlessS0ul)
 
 -----
-
-## ❤️ Support the project
-If you would like to support this project, please consider starring the repository or following me! If you appreciate the hard work that went into this, buying me a cup of coffee would keep me fueled! ☕ 
-
-**BTC Address:** `bc1qvul4mlxxw5h2hnt8knnxdrxuwgpf4styyk20tm`
-
-**ETH Address:** `0x5c54eAb2acFE1c6C866FB4b050d8B69CfB1138Af`
-
-**LTC Address:** `LbdzCsYbxuD341raar6Cg1yKavaDq7fjuV`
-
-**XRP Address:** `rKLLPzoBGfqY3pAQPwTFPRYaWjpHSwHNDw`
-
-**ADA Address:** `addr1qyz2aku0ucmxqnl60lza23lkx2xha8zmxz9wqxnrtvpjysgy4mdcle3kvp8l5l7964rlvv5d06w9kvy2uqdxxkcryfqs7pajev`
-
-**DOGE Address:** `DBzAvD62yQUkP4Cb7C5LuFYQEierF3D3oG`
-
-Every donation is greatly appreciated and contributes to the ongoing development of this project!
-
----
-
-## 🌐 Follow Me for Updates
-Stay connected to receive the latest updates:
-
-[![GitHub](https://img.shields.io/badge/GitHub-W0rthlessS0ul-181717?style=flat&logo=github&logoColor=white)](https://github.com/W0rthlessS0ul)
-
-<img src="https://profile-counter.glitch.me/W0rthlessS0ul.nRF24_jammer/count.svg"/>
