@@ -1,8 +1,8 @@
 <div align="center">
-  <img src="https://avatars.githubusercontent.com/u/176677387" width="150" height="auto" />
-  <h1> 🌟 JamJam 🌟 </h1>
+  <img src="https://github.com/user-attachments/assets/de9b7c57-4118-4eea-9722-b3bfc3986270" width="150" height="auto" />
 </div>
 
+<h1> JamJam </h1>
 Welcome to the **JamJam** repository! 🎉 Dive into the world of RF interference with this unique project based on the ESP32-C3 and NRF24 technology.
 
 ## 📚 Table of Contents
@@ -29,7 +29,7 @@ Welcome to the **JamJam** repository! 🎉 Dive into the world of RF interferenc
 ----- -->
 
 ## 🚀 What Can You Do with This?
-This amazing jammer is built on the **ESP32-C3** architecture integrated with **configurable numbers of NRF24** modules. With its extraordinary capabilities, you can effectively disrupt signals across different technologies including:
+This jammer is built on the **ESP32-C3** architecture integrated with **configurable numbers of NRF24** modules. With its extraordinary capabilities, you can effectively disrupt signals across different technologies including:
 - **Bluetooth** 🔊
 - **BLE** 📱
 - **Drones** 🚁
